@@ -8,7 +8,7 @@ import SignUpScreen from "../authentication/screens/signup/SignUpScreen";
 import SuccessScreen from "../../common/components/SuccessScreen";
 import CarDetailsScreen from "../car/screens/display-cars/CarDetailsScreen";
 import AddCarScreen from "../car/screens/add-car/AddCarScreen";
-import ChatScreen from "../home/screens/home-components/Chat";
+import ChatScreen from "../chat/screens/Chat";
 import HomeScreen from "../home/screens/HomeScreen";
 import AgencyScreen from "../agency/screens/create-agency/AgencyScreen";
 import AgencyCarsScreen from "../car/screens/display-cars/AgencyCarsScreen";

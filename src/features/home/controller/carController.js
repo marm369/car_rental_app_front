@@ -1,4 +1,4 @@
-import { getAllCars, getCarRentalDetails as getCarRentalDetailsService } from "../service/CarService"
+import { getAllCars, getCarRentalDetails as getCarRentalDetailsService } from "../service/carService"
 
 const CarController = {
   getCars: async () => {

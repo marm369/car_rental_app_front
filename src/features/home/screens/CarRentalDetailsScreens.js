@@ -21,7 +21,7 @@ import {
 } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import CarController from "../controller/CarController";
+import CarController from "../controller/carController";
 import ReservationDialog from "../../reservation/screens/ReservationDialog";
 import { ReservationService } from "../../reservation/services/ReservationService";
 
@@ -192,9 +192,7 @@ const CarRentalDetailsScreen = ({ route, navigation }) => {
               </View>
               <TouchableOpacity
                 style={styles.messageButton}
-                onPress={() => {
-                  console.log("Send message to owner");
-                }}
+                onPress={() => navigation.navigate("ChatScreen", { ownerId: carDetails.ownerId })}
               >
                 <MessageCircle size={24} color="#1E90FF" />
               </TouchableOpacity>
