@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Assure-toi d'importer AsyncStorage
+import { API_BASE_URL } from "../../../config/config";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -9,7 +10,7 @@ export const login = (credentials) => async (dispatch) => {
 
   try {
     // Effectue la requête vers le backend
-    const response = await fetch(`http://192.168.1.131:3000/users/login`, {
+    const response = await fetch(`${API_BASE_URL}/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
