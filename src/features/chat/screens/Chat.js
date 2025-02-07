@@ -41,7 +41,7 @@ const ChatScreen = ({ route }) => {
               ? ''
               : date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            const isSender = item.sender.id === userId;
+    const isSender = item.sender && item.sender.id === userId;
 
             return (
               <View style={[styles.messageContainer, isSender ? styles.youMessage : styles.serverMessage]}>
