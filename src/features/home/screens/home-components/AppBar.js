@@ -23,14 +23,17 @@ export const AppBar = ({ onNotificationPress }) => {
           setUserRole(storedRole);
         }
       } catch (error) {
-        console.error("Erreur lors de la récupération des données utilisateur :", error);
+        console.error(
+          "Erreur lors de la récupération des données utilisateur :",
+          error
+        );
       }
     };
     fetchUserData();
   }, []);
 
   const handleMessagePress = () => {
-    navigation.navigate("ConversationScreen");
+    navigation.navigate("Conversation");
   };
 
   const handleReservationPress = () => {
@@ -41,21 +44,32 @@ export const AppBar = ({ onNotificationPress }) => {
     <View style={styles.container}>
       <View style={styles.profileContainer}>
         <Image
-          source={{ uri: userInfo?.picture || "https://via.placeholder.com/40" }}
+          source={{
+            uri: userInfo?.picture || "https://via.placeholder.com/40",
+          }}
           style={styles.profileImage}
         />
         <Text style={styles.userName}>{username || "Utilisateur"}</Text>
       </View>
       <View style={styles.iconsContainer}>
-        <TouchableOpacity onPress={handleMessagePress} style={styles.iconButton}>
+        <TouchableOpacity
+          onPress={handleMessagePress}
+          style={styles.iconButton}
+        >
           <MessageCircle size={24} color="#000" />
         </TouchableOpacity>
         {userRole === "RENTER" && (
-          <TouchableOpacity onPress={handleReservationPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleReservationPress}
+            style={styles.iconButton}
+          >
             <Calendar size={24} color="#000" />
           </TouchableOpacity>
         )}
-        <TouchableOpacity onPress={onNotificationPress} style={styles.iconButton}>
+        <TouchableOpacity
+          onPress={onNotificationPress}
+          style={styles.iconButton}
+        >
           <Bell size={24} color="#000" />
         </TouchableOpacity>
       </View>

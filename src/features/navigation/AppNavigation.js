@@ -15,7 +15,7 @@ import AgencyCarsScreen from "../car/screens/display-cars/AgencyCarsScreen";
 import AgencyDetailsScreen from "../geolocalisation/screens/AgencyDetailsScreen";
 import CarRentalDetailsScreen from "../home/screens/CarRentalDetailsScreens";
 import ReservationManagementScreen from "../reservation/screens/ReservationManagementScreen";
-import ConversationsList from "../chat/screens/ConversationList"; 
+import ConversationScreen from "../chat/screens/ConversationScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -54,13 +54,13 @@ export default function AppNavigation() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ChatScreen"
+          name="Chat"
           component={ChatScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ConversationScreen"
-          component={ConversationsList}
+          name="Conversation"
+          component={ConversationScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen

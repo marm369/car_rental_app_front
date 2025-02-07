@@ -90,14 +90,14 @@ const styles = StyleSheet.create({
   },
   youMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#28a745', // Vert pour les messages envoyés
+    backgroundColor: '#28a745', 
   },
   serverMessage: {
     alignSelf: 'flex-start',
-    backgroundColor: '#e0e0e0', // Gris pour les messages reçus
+    backgroundColor: '#e0e0e0', 
   },
   messageText: {
-    color: '#fff', // Texte blanc pour les messages envoyés
+    color: '#fff', 
   },
   timeText: {
     fontSize: 12,

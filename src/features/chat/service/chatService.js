@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { API_BASE_URL } from "../../../config/Config";
 
-// Fonction pour récupérer les messages
 export const fetchConversation = async (userId, ownerId) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/conversations/between/${userId}/${ownerId}`);
@@ -16,7 +15,7 @@ export const fetchConversation = async (userId, ownerId) => {
 // Fonction pour envoyer un message
 export const sendMessage = async (senderId, receiverId, content) => {
   try {
-    await axios.post(`${API_BASE_URL}/messages/send`, {  // Ajout des backticks ici
+    await axios.post(`${API_BASE_URL}/messages/send`, {  
       senderId,
       receiverId,
       content,

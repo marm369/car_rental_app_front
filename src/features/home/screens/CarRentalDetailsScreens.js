@@ -192,7 +192,9 @@ const CarRentalDetailsScreen = ({ route, navigation }) => {
               </View>
               <TouchableOpacity
                 style={styles.messageButton}
-                onPress={() => navigation.navigate("ChatScreen", { ownerId: carDetails.ownerId })}
+                onPress={() =>
+                  navigation.navigate("Chat", { ownerId: carDetails.ownerId })
+                }
               >
                 <MessageCircle size={24} color="#1E90FF" />
               </TouchableOpacity>

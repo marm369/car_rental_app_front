@@ -15,7 +15,7 @@ const ConversationController = ({ userId, setConversations, setLoading }) => {
     }
   }, [userId, setConversations, setLoading]);
 
-  return null; // No need to render anything
+  return null; 
 };
 
 export default ConversationController;

@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { fetchUserConversations } from "../service/ConversationService";
@@ -30,17 +37,32 @@ const ConversationsList = ({ userId }) => {
       data={conversations}
       keyExtractor={(conv) => conv.id.toString()}
       renderItem={({ item: conv }) => {
-        const otherUser = conv.user.id === userId ? conv.messages[0]?.receiver : conv.messages[0]?.sender;
+        const otherUser =
+          conv.user.id === userId
+            ? conv.messages[0]?.receiver
+            : conv.messages[0]?.sender;
         if (!otherUser) return null;
 
-        const lastMessage = conv.messages.length > 0 ? conv.messages[conv.messages.length - 1].content : "Aucun message";
+        const lastMessage =
+          conv.messages.length > 0
+            ? conv.messages[conv.messages.length - 1].content
+            : "Aucun message";
 
         return (
-          <TouchableOpacity onPress={() => navigation.navigate("ChatScreen", { ownerId: otherUser.id })}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Chat", { ownerId: otherUser.id })
+            }
+          >
             <View style={styles.conversationItem}>
-              <Image source={{ uri: otherUser.picture }} style={styles.avatar} />
+              <Image
+                source={{ uri: otherUser.picture }}
+                style={styles.avatar}
+              />
               <View style={styles.textContainer}>
-                <Text style={styles.name}>{otherUser.firstName} {otherUser.lastName}</Text>
+                <Text style={styles.name}>
+                  {otherUser.firstName} {otherUser.lastName}
+                </Text>
                 <Text style={styles.message}>{lastMessage}</Text>
               </View>
             </View>
@@ -64,7 +86,11 @@ const ConversationScreen = () => {
 
   return (
     <View style={styles.container}>
-      {userId ? <ConversationsList userId={userId} /> : <Text>Chargement de l'utilisateur...</Text>}
+      {userId ? (
+        <ConversationsList userId={userId} />
+      ) : (
+        <Text>Chargement de l'utilisateur...</Text>
+      )}
     </View>
   );
 };
