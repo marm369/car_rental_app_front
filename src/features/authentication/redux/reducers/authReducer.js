@@ -1,5 +1,9 @@
 // src/redux/reducers/authReducer.js
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions/authActions";
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+} from "../actions/AuthActions";
 
 const initialState = {
   user: null,

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { fetchUserConversations } from "../service/conversationService";
+import { fetchUserConversations } from "../service/ConversationService";
 
 const ConversationsList = ({ userId }) => {
   const [conversations, setConversations] = useState([]);

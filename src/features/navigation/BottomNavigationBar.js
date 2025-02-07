@@ -9,17 +9,27 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_BASE_URL } from "../../config/config";
+import { API_BASE_URL } from "../../config/Config";
 
 const Tab = createBottomTabNavigator();
 
 // Lazy-loaded components
 const HomeScreen = React.lazy(() => import("../home/screens/HomeScreen"));
-const MapScreen = React.lazy(() => import("../geolocalisation/screens/MapScreen"));
-const ProfileScreen = React.lazy(() => import("../profile/screens/ProfileScreen"));
-const AgencyScreen = React.lazy(() => import("../agency/screens/create-agency/AgencyScreen"));
-const AgencyCarsScreen = React.lazy(() => import("../car/screens/display-cars/AgencyCarsScreen"));
-const ReservationScreen = React.lazy(() => import("../reservation/screens/ResponsesScreen"));
+const MapScreen = React.lazy(() =>
+  import("../geolocalisation/screens/MapScreen")
+);
+const ProfileScreen = React.lazy(() =>
+  import("../profile/screens/ProfileScreen")
+);
+const AgencyScreen = React.lazy(() =>
+  import("../agency/screens/create-agency/AgencyScreen")
+);
+const AgencyCarsScreen = React.lazy(() =>
+  import("../car/screens/display-cars/AgencyCarsScreen")
+);
+const ReservationScreen = React.lazy(() =>
+  import("../reservation/screens/ResponsesScreen")
+);
 
 export default function BottomNavigationBar() {
   const [isCreated, setIsCreated] = useState(false);
@@ -49,12 +59,15 @@ export default function BottomNavigationBar() {
           isAgencyRole = true;
         }
         if (isAgencyRole) {
-          const agencyResponse = await fetch(`${API_BASE_URL}/agencies/user/${userId}/hasAgency`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          const agencyResponse = await fetch(
+            `${API_BASE_URL}/agencies/user/${userId}/hasAgency`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
 
           if (!agencyResponse.ok) {
             throw new Error(`HTTP error! status: ${agencyResponse.status}`);
@@ -141,7 +154,10 @@ function CustomTabButton({ accessibilityState, children, onPress, route }) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.tabButton, isSelected ? { backgroundColor: activeBackgroundColor } : null]}
+      style={[
+        styles.tabButton,
+        isSelected ? { backgroundColor: activeBackgroundColor } : null,
+      ]}
     >
       <Ionicons
         name={getIconName(route.name, isSelected)}
@@ -181,11 +197,19 @@ function LoadingFallback() {
 }
 
 function MapScreenWithLoader() {
-  return <React.Suspense fallback={<LoadingFallback />}><MapScreen /></React.Suspense>;
+  return (
+    <React.Suspense fallback={<LoadingFallback />}>
+      <MapScreen />
+    </React.Suspense>
+  );
 }
 
 function ProfileScreenWithLoader() {
-  return <React.Suspense fallback={<LoadingFallback />}><ProfileScreen /></React.Suspense>;
+  return (
+    <React.Suspense fallback={<LoadingFallback />}>
+      <ProfileScreen />
+    </React.Suspense>
+  );
 }
 
 const styles = StyleSheet.create({

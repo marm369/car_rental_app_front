@@ -15,7 +15,7 @@ import AgencyCarsScreen from "../car/screens/display-cars/AgencyCarsScreen";
 import AgencyDetailsScreen from "../geolocalisation/screens/AgencyDetailsScreen";
 import CarRentalDetailsScreen from "../home/screens/CarRentalDetailsScreens";
 import ReservationManagementScreen from "../reservation/screens/ReservationManagementScreen";
-import ConversationsList from "../chat/screens/conversationList";  // Assurez-vous de bien l'importer
+import ConversationsList from "../chat/screens/ConversationList"; 
 
 const Stack = createNativeStackNavigator();
 

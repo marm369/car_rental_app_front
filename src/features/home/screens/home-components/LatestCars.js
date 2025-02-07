@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { getLatestCars } from "../../service/carService";
+import { getLatestCars } from "../../service/CarService";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";

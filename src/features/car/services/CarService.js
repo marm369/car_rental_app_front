@@ -1,6 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { API_BASE_URL } from "../../../config/config";
+import { API_BASE_URL } from "../../../config/Config";
 
 export const CarService = {
   getCarTypes: async () => {
@@ -54,7 +54,9 @@ export const CarService = {
 
   getCarsByAgency: async (username) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/users/${username}/cars`);
+      const response = await axios.get(
+        `${API_BASE_URL}/users/${username}/cars`
+      );
       return response.data;
     } catch (error) {
       console.error("Error fetching cars:", error);
@@ -63,7 +65,9 @@ export const CarService = {
   },
   getBrandModelByCarId: async (carId) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/cars/${carId}/brand-model`);
+      const response = await axios.get(
+        `${API_BASE_URL}/cars/${carId}/brand-model`
+      );
       return response.data;
     } catch (error) {
       console.error(
@@ -75,7 +79,9 @@ export const CarService = {
   },
   deleteCar: async (carId) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/cars/delete/${carId}`);
+      const response = await axios.delete(
+        `${API_BASE_URL}/cars/delete/${carId}`
+      );
       return response.data;
     } catch (error) {
       console.error("Error deleting car:", error);

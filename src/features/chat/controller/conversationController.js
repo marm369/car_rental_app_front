@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchUserConversations } from "../service/conversationService";
+import { fetchUserConversations } from "../service/ConversationService";
 
 const ConversationController = ({ userId, setConversations, setLoading }) => {
   useEffect(() => {

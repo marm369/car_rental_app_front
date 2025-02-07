@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Alert,
   ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";

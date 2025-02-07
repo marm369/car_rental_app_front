@@ -21,7 +21,7 @@ import {
 } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import CarController from "../controller/carController";
+import CarController from "../controller/CarController";
 import ReservationDialog from "../../reservation/screens/ReservationDialog";
 import { ReservationService } from "../../reservation/services/ReservationService";
 

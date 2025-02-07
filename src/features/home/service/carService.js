@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../../config/config";
+import { API_BASE_URL } from "../../../config/Config";
 import axios from "axios";
 
 export const getAllCars = async () => {

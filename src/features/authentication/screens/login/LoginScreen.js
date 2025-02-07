@@ -35,9 +35,6 @@ const LoginScreen = () => {
   };
 
   const handleSignIn = async () => {
-    console.log("Username:", formValues.username);
-    console.log("Password:", formValues.password);
-
     if (!formValues.username || !formValues.password) {
       alert("Username and Password are required.");
       return;
@@ -61,7 +58,11 @@ const LoginScreen = () => {
 
   return (
     <View style={LoginStyles.container}>
-      <Image source={Images.imageLogo} style={LoginStyles.logo1} resizeMode="contain" />
+      <Image
+        source={Images.imageLogo}
+        style={LoginStyles.logo1}
+        resizeMode="contain"
+      />
       <Image
         source={Images.lightTextLogo}
         style={LoginStyles.logo2}
@@ -73,7 +74,12 @@ const LoginScreen = () => {
 
       <View style={LoginStyles.space}>
         <View style={LoginStyles.inputWrapper}>
-          <Icon name="email" size={20} color="#888" style={LoginStyles.iconLeft} />
+          <Icon
+            name="email"
+            size={20}
+            color="#888"
+            style={LoginStyles.iconLeft}
+          />
           <TextInput
             style={LoginStyles.input}
             placeholder="Username"
@@ -84,7 +90,12 @@ const LoginScreen = () => {
         </View>
 
         <View style={LoginStyles.inputWrapper}>
-          <Icon name="lock" size={20} color="#888" style={LoginStyles.iconLeft} />
+          <Icon
+            name="lock"
+            size={20}
+            color="#888"
+            style={LoginStyles.iconLeft}
+          />
           <TextInput
             style={LoginStyles.input}
             placeholder="Password"
@@ -93,7 +104,10 @@ const LoginScreen = () => {
             value={formValues.password}
             onChangeText={(text) => handleInputChange("password", text)}
           />
-          <TouchableOpacity onPress={togglePasswordVisibility} style={LoginStyles.iconRight}>
+          <TouchableOpacity
+            onPress={togglePasswordVisibility}
+            style={LoginStyles.iconRight}
+          >
             <Icon
               name={secureTextEntry ? "visibility-off" : "visibility"}
               size={20}
@@ -104,7 +118,10 @@ const LoginScreen = () => {
 
         {error && <Text style={{ color: "red" }}>{error}</Text>}
 
-        <TouchableOpacity style={LoginStyles.signInButton} onPress={handleSignIn}>
+        <TouchableOpacity
+          style={LoginStyles.signInButton}
+          onPress={handleSignIn}
+        >
           {loading ? (
             <ActivityIndicator color="#FFF" />
           ) : (
@@ -112,7 +129,10 @@ const LoginScreen = () => {
           )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={LoginStyles.createAccountButton} onPress={handleCreateAccount}>
+        <TouchableOpacity
+          style={LoginStyles.createAccountButton}
+          onPress={handleCreateAccount}
+        >
           <Text style={LoginStyles.createAccountText}>Create Account</Text>
         </TouchableOpacity>
       </View>

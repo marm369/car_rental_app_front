@@ -1,8 +1,10 @@
-import { API_BASE_URL } from "../../../config/config";
+import { API_BASE_URL } from "../../../config/Config";
 
 export const fetchUserConversations = async (userId) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/conversations/user/${userId}`);
+    const response = await fetch(
+      `${API_BASE_URL}/conversations/user/${userId}`
+    );
     const data = await response.json();
     console.log("Données reçues :", JSON.stringify(data, null, 2));
 
@@ -12,4 +14,3 @@ export const fetchUserConversations = async (userId) => {
     return [];
   }
 };
-

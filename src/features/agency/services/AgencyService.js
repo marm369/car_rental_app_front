@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Alert } from "react-native";
-import { API_BASE_URL } from "../../../config/config";
+import { API_BASE_URL } from "../../../config/Config";
 import AgencyModel from "../models/AgencyModel";
 
 export const AgencyService = {
