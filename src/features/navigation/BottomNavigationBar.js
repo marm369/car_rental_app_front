@@ -15,21 +15,11 @@ const Tab = createBottomTabNavigator();
 
 // Lazy-loaded components
 const HomeScreen = React.lazy(() => import("../home/screens/HomeScreen"));
-const MapScreen = React.lazy(() =>
-  import("../geolocalisation/screens/MapScreen")
-);
-const ProfileScreen = React.lazy(() =>
-  import("../profile/screens/ProfileScreen")
-);
-const AgencyScreen = React.lazy(() =>
-  import("../agency/screens/create-agency/AgencyScreen")
-);
-const AgencyCarsScreen = React.lazy(() =>
-  import("../car/screens/display-cars/AgencyCarsScreen")
-);
-const ReservationScreen = React.lazy(() =>
-  import("../reservation/screens/ResponsesScreen")
-);
+const MapScreen = React.lazy(() => import("../geolocalisation/screens/MapScreen"));
+const ProfileScreen = React.lazy(() => import("../profile/screens/ProfileScreen"));
+const AgencyScreen = React.lazy(() => import("../agency/screens/create-agency/AgencyScreen"));
+const AgencyCarsScreen = React.lazy(() => import("../car/screens/display-cars/AgencyCarsScreen"));
+const ReservationScreen = React.lazy(() => import("../reservation/screens/ResponsesScreen"));
 
 export default function BottomNavigationBar() {
   const [isCreated, setIsCreated] = useState(false);
@@ -92,6 +82,7 @@ export default function BottomNavigationBar() {
   if (loading) {
     return <LoadingFallback />;
   }
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -102,7 +93,7 @@ export default function BottomNavigationBar() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="Map" component={MapScreenWithLoader} />
       {isAgency ? (
         isCreated ? (
           <Tab.Screen name="Cars" component={AgencyCarsScreen} />
@@ -112,7 +103,7 @@ export default function BottomNavigationBar() {
       ) : (
         <Tab.Screen name="Reservation" component={ReservationScreen} />
       )}
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreenWithLoader} />
     </Tab.Navigator>
   );
 }
@@ -120,7 +111,6 @@ export default function BottomNavigationBar() {
 function CustomTabButton({ accessibilityState, children, onPress, route }) {
   const isSelected = accessibilityState?.selected;
 
-  // Set custom colors for each tab
   let activeBackgroundColor = "#E5E5E5";
   let activeIconColor = "#000";
 
@@ -151,10 +141,7 @@ function CustomTabButton({ accessibilityState, children, onPress, route }) {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[
-        styles.tabButton,
-        isSelected ? { backgroundColor: activeBackgroundColor } : null,
-      ]}
+      style={[styles.tabButton, isSelected ? { backgroundColor: activeBackgroundColor } : null]}
     >
       <Ionicons
         name={getIconName(route.name, isSelected)}
@@ -191,6 +178,14 @@ function LoadingFallback() {
       <Text>Loading...</Text>
     </View>
   );
+}
+
+function MapScreenWithLoader() {
+  return <React.Suspense fallback={<LoadingFallback />}><MapScreen /></React.Suspense>;
+}
+
+function ProfileScreenWithLoader() {
+  return <React.Suspense fallback={<LoadingFallback />}><ProfileScreen /></React.Suspense>;
 }
 
 const styles = StyleSheet.create({

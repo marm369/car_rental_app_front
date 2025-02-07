@@ -9,7 +9,6 @@ const ConversationScreen = () => {
   useEffect(() => {
     const getUserId = async () => {
       const storedUserId = await AsyncStorage.getItem("userId");
-      console.log("User ID récupéré :", storedUserId);
       setUserId(parseInt(storedUserId));
     };
     getUserId();
@@ -27,6 +26,30 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+  },
+  conversationItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+  },
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 12,
+  },
+  textContainer: {
+    flex: 1,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  message: {
+    fontSize: 14,
+    color: "#555",
   },
 });
 
