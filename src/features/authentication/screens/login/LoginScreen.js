@@ -1,54 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   Image,
-  useColorScheme,
+  ActivityIndicator,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Texts from "../../../../utils/constants/Texts";
-import Images from "../../../../utils/constants/Images";
-import LoginController from "../../controllers/LoginController";
+import { login } from "../../redux/actions/authActions";
 import LoginStyles from "./LoginStyles";
+import Images from "../../../../utils/constants/Images";
+import Texts from "../../../../utils/constants/Texts";
 
 const LoginScreen = () => {
-  const {
-    formValues,
-    handleInputChange,
-    secureTextEntry,
-    togglePasswordVisibility,
-    handleSignIn,
-    handleCreateAccount,
-    errors,
-  } = LoginController();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const { loading, error } = useSelector((state) => state.auth);
 
-  const colorScheme = useColorScheme();
-  const textLogo =
-    colorScheme === "dark" ? Images.darkTextLogo : Images.lightTextLogo;
+  const [formValues, setFormValues] = useState({
+    username: "",
+    password: "",
+  });
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+  const handleInputChange = (field, value) => {
+    setFormValues((prevValues) => ({ ...prevValues, [field]: value }));
+  };
+
+  const togglePasswordVisibility = () => {
+    setSecureTextEntry(!secureTextEntry);
+  };
+
+  const handleSignIn = async () => {
+    console.log("Username:", formValues.username);
+    console.log("Password:", formValues.password);
+
+    if (!formValues.username || !formValues.password) {
+      alert("Username and Password are required.");
+      return;
+    }
+
+    const result = await dispatch(login(formValues));
+    if (result.success) {
+      console.log("Login successful!");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "BottomNavigationBar" }],
+      });
+    } else {
+      alert(`Login failed: ${result.message}`);
+    }
+  };
+
+  const handleCreateAccount = () => {
+    navigation.navigate("SignUp");
+  };
 
   return (
     <View style={LoginStyles.container}>
+      <Image source={Images.imageLogo} style={LoginStyles.logo1} resizeMode="contain" />
       <Image
-        source={Images.imageLogo}
-        style={LoginStyles.logo1}
+        source={Images.lightTextLogo}
+        style={LoginStyles.logo2}
         resizeMode="contain"
       />
-
-      <Image source={textLogo} style={LoginStyles.logo2} resizeMode="contain" />
 
       <Text style={LoginStyles.title}>{Texts.loginTitle}</Text>
       <Text style={LoginStyles.subTitle}>{Texts.loginSubTitle}</Text>
 
       <View style={LoginStyles.space}>
         <View style={LoginStyles.inputWrapper}>
-          <Icon
-            name="email"
-            size={20}
-            color="#888"
-            style={LoginStyles.iconLeft}
-          />
+          <Icon name="email" size={20} color="#888" style={LoginStyles.iconLeft} />
           <TextInput
             style={LoginStyles.input}
             placeholder="Username"
@@ -58,17 +83,8 @@ const LoginScreen = () => {
           />
         </View>
 
-        {errors.username && (
-          <Text style={{ color: "red" }}>{errors.username}</Text>
-        )}
-
         <View style={LoginStyles.inputWrapper}>
-          <Icon
-            name="lock"
-            size={20}
-            color="#888"
-            style={LoginStyles.iconLeft}
-          />
+          <Icon name="lock" size={20} color="#888" style={LoginStyles.iconLeft} />
           <TextInput
             style={LoginStyles.input}
             placeholder="Password"
@@ -77,10 +93,7 @@ const LoginScreen = () => {
             value={formValues.password}
             onChangeText={(text) => handleInputChange("password", text)}
           />
-          <TouchableOpacity
-            onPress={togglePasswordVisibility}
-            style={LoginStyles.iconRight}
-          >
+          <TouchableOpacity onPress={togglePasswordVisibility} style={LoginStyles.iconRight}>
             <Icon
               name={secureTextEntry ? "visibility-off" : "visibility"}
               size={20}
@@ -89,27 +102,17 @@ const LoginScreen = () => {
           </TouchableOpacity>
         </View>
 
-        {errors.password && (
-          <Text style={{ color: "red" }}>{errors.password}</Text>
-        )}
+        {error && <Text style={{ color: "red" }}>{error}</Text>}
 
-        <View style={LoginStyles.rememberMeContainer}>
-          <TouchableOpacity>
-            <Text style={LoginStyles.forgotPasswordText}>Forget Password?</Text>
-          </TouchableOpacity>
-        </View>
-
-        <TouchableOpacity
-          style={LoginStyles.signInButton}
-          onPress={handleSignIn}
-        >
-          <Text style={LoginStyles.signInText}>Sign In</Text>
+        <TouchableOpacity style={LoginStyles.signInButton} onPress={handleSignIn}>
+          {loading ? (
+            <ActivityIndicator color="#FFF" />
+          ) : (
+            <Text style={LoginStyles.signInText}>Sign In</Text>
+          )}
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={LoginStyles.createAccountButton}
-          onPress={handleCreateAccount}
-        >
+        <TouchableOpacity style={LoginStyles.createAccountButton} onPress={handleCreateAccount}>
           <Text style={LoginStyles.createAccountText}>Create Account</Text>
         </TouchableOpacity>
       </View>

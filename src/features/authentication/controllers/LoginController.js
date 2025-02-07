@@ -1,52 +1,39 @@
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { handleLoginRequest } from "../services/LoginService";
-import LoginModel from "../models/LoginModel";
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { loginUser } from '../redux/authSlice';
 
 const LoginController = () => {
-  const [formValues, setFormValues] = useState(LoginModel);
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [errors, setErrors] = useState({});
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
-  const togglePasswordVisibility = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
+  const [formValues, setFormValues] = useState({
+    username: '',
+    password: '',
+  });
 
   const handleInputChange = (field, value) => {
     setFormValues((prevValues) => ({ ...prevValues, [field]: value }));
   };
 
-  const handleSignIn = async () => {
+  const handleSignIn = () => {
     if (!formValues.username || !formValues.password) {
-      setErrors({
-        username: !formValues.username ? "Username is required" : null,
-        password: !formValues.password ? "Password is required" : null,
-      });
+      alert('Username and Password are required.');
       return;
     }
 
-    const result = await handleLoginRequest(formValues);
+    // Afficher les valeurs saisies dans la console
+    console.log('Username:', formValues.username);
+    console.log('Password:', formValues.password);
 
-    if (result.success) {
-      navigation.navigate("BottomNavigationBar");
-    } else {
-      alert(`Login failed: ${result.message}`);
-    }
-  };
-
-  const handleCreateAccount = () => {
-    navigation.navigate("SignUp");
+    dispatch(loginUser(formValues));
   };
 
   return {
     formValues,
     handleInputChange,
-    secureTextEntry,
-    togglePasswordVisibility,
     handleSignIn,
-    handleCreateAccount,
-    errors,
+    loading,
+    error,
   };
 };
 
