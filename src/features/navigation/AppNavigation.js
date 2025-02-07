@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import OnboardingScreen from "../authentication/screens/onboarding/OnboardingScreen";
@@ -15,8 +15,10 @@ import AgencyCarsScreen from "../car/screens/display-cars/AgencyCarsScreen";
 import AgencyDetailsScreen from "../geolocalisation/screens/AgencyDetailsScreen";
 import CarRentalDetailsScreen from "../home/screens/CarRentalDetailsScreens";
 import ReservationManagementScreen from "../reservation/screens/ReservationManagementScreen";
+import ConversationsList from "../chat/screens/conversationList";  // Assurez-vous de bien l'importer
 
 const Stack = createNativeStackNavigator();
+
 export default function AppNavigation() {
   return (
     <NavigationContainer>
@@ -57,6 +59,11 @@ export default function AppNavigation() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="ConversationScreen"
+          component={ConversationsList}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="CarDetails"
           component={CarDetailsScreen}
           options={{ headerShown: false }}
@@ -81,7 +88,6 @@ export default function AppNavigation() {
           component={AgencyDetailsScreen}
           options={{ headerShown: false }}
         />
-
         <Stack.Screen
           name="CarRentalDetails"
           component={CarRentalDetailsScreen}
