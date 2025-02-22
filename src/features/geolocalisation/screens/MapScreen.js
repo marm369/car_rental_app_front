@@ -10,8 +10,10 @@ import {
 import MapView, { Marker, Callout } from "react-native-maps";
 import { useMapController } from "../controllers/MapController";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native"
 
-const MapScreen = ({ navigation }) => {
+const MapScreen = () => {
+  const navigation = useNavigation()
   const {
     agencies,
     region,

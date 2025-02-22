@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { login } from "../../redux/actions/authActions";
+import { login } from "../../redux/actions/AuthActions";
 import LoginStyles from "./LoginStyles";
 import Images from "../../../../utils/constants/Images";
 import Texts from "../../../../utils/constants/Texts";

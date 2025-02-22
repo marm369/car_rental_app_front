@@ -11,12 +11,10 @@ const HomeScreen = () => {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const applyFilters = (selectedFilters) => {
-    console.log("Applying filters:", selectedFilters);
     setFilters(selectedFilters);
   };
 
   const resetFilters = () => {
-    console.log("Resetting filters");
     setFilters(null);
   };
 

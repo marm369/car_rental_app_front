@@ -1,35 +1,33 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API_BASE_URL } from "../../../config/Config";
 import AgencyModel from "../models/AgencyModel";
+import * as Location from "expo-location";
 
 export const AgencyService = {
+  
+
+
+
+
+  
   async searchPlace(searchPlace) {
     if (!searchPlace.trim()) {
       throw new Error("Please enter a location to search!");
     }
-
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-      searchPlace
-    )}&format=json&addressdetails=1`;
-
+  
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Unable to connect to the search service.");
-      }
-
-      const data = await response.json();
-      if (data.length > 0) {
-        const { lat, lon } = data[0];
+      const result = await Location.geocodeAsync(searchPlace);
+  
+      if (result.length > 0) {
         return {
-          latitude: Number.parseFloat(lat),
-          longitude: Number.parseFloat(lon),
+          latitude: result[0].latitude,
+          longitude: result[0].longitude,
         };
       } else {
         throw new Error("Location not found.");
       }
     } catch (error) {
-      throw new Error(`An error occurred: ${error.message}`);
+      throw new Error(`Error searching location: ${error.message}`);
     }
   },
 
